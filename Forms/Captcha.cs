@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Demo_template.Forms
@@ -33,7 +29,7 @@ namespace Demo_template.Forms
 
         private void image_MouseDown(object sender, MouseEventArgs e) 
         {
-            var pictureBox = (PictureBox)sender;
+            //var pictureBox = (PictureBox)sender;
             pictureBox3.DoDragDrop((PictureBox)sender, DragDropEffects.Move);
         }
 
@@ -51,8 +47,7 @@ namespace Demo_template.Forms
                 OrderBy(c => tableLayoutPanel1.GetRow(c)).
                 ThenBy(c => tableLayoutPanel2.GetColumn(c)).ToList();
 
-            for (int i = 0; i < 4; i++)
-            {
+            for (int i = 0; i < 4; i++) {
                 if (attemps <= 0) 
                 {
                     MessageBox.Show("Ты забанен");
@@ -72,11 +67,14 @@ namespace Demo_template.Forms
                     }
                 }
                 catch {
-                    MessageBox.Show("Вы не заполнили каптчу!");
+                    MessageBox.Show("Заполните каптчу корректно!");
                     return;
                 }
             }
             MessageBox.Show("Вы успешно прошли каптчу!");
+            MainForm mainForm = new MainForm();
+            mainForm.Show();
+            this.Hide();
         }
     }
 }
