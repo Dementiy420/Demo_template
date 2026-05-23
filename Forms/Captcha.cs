@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -8,17 +9,20 @@ namespace Demo_template.Forms
 {
     public partial class Captcha : Form
     {
-        int attemps = 3;
+        string login;
+        int attemps;
 
         List<string> tags = new List<string>(){"picture_1", "picture_2", "picture_3", "picture_4"};
 
-        public Captcha() 
+        public Captcha(string Login, int Attempts) 
         {
             InitializeComponent();        
             picture_1.AllowDrop = true;
             picture_2.AllowDrop = true;
             picture_3.AllowDrop = true;
             picture_4.AllowDrop = true;
+            login = Login;
+            attemps = Attempts;
         }
 
         private void image_DragEnter(object sender, DragEventArgs e) 
@@ -27,9 +31,9 @@ namespace Demo_template.Forms
                 e.Effect = DragDropEffects.Move;
         }
 
-        private void image_MouseDown(object sender, MouseEventArgs e) 
+        private void image_MouseDown(object sender, MouseEventArgs e)
         {
-            //var pictureBox = (PictureBox)sender;
+            var pictureBox = (PictureBox)sender;
             pictureBox3.DoDragDrop((PictureBox)sender, DragDropEffects.Move);
         }
 
@@ -43,38 +47,47 @@ namespace Demo_template.Forms
 
         private void SendCaptcha_Click(object sender, EventArgs e)
         {
-            List<PictureBox> elements = tableLayoutPanel1.Controls.Cast<PictureBox>().
+            using (MySqlConnection connect = new MySqlConnection("server=localhost;uid=root;pwd=root;database=mydb"))
+            {
+                connect.Open();
+                List<PictureBox> elements = tableLayoutPanel1.Controls.Cast<PictureBox>().
                 OrderBy(c => tableLayoutPanel1.GetRow(c)).
                 ThenBy(c => tableLayoutPanel2.GetColumn(c)).ToList();
 
-            for (int i = 0; i < 4; i++) {
-                if (attemps <= 0) 
-                {
-                    MessageBox.Show("Ты забанен");
-                    //место для блокировки через БД
-                    Login login = new Login();
-                    login.Show();
-                    this.Hide();
-                }
+                MySqlCommand adapter = new MySqlCommand($"UPDATE mydb.users SET Captcha_attempts = Captcha_attempts - 1 WHERE Login = '{login}';", connect);
 
-                try
+                for (int i = 0; i < 4; i++)
                 {
-                    if (elements[i].Tag.ToString() != tags[i])
+                    if (attemps <= 0)
                     {
-                        --attemps;
-                        MessageBox.Show($"Капча собрана неверно! Осталось попыток: {attemps}");
+                        MessageBox.Show("Вы заблокированы! Обратитесь к администратору!");
+                        DialogResult = DialogResult.Cancel;
                         return;
                     }
+
+                    try
+                    {
+                        if (elements[i].Tag.ToString() != tags[i])
+                        {
+                            adapter.ExecuteNonQuery();
+                            --attemps;
+                            MessageBox.Show($"Капча собрана неверно! Осталось попыток: {attemps}");
+                            return;
+                        }
                 }
-                catch {
-                    MessageBox.Show("Заполните каптчу корректно!");
-                    return;
-                }
+                    catch
+                    {
+                        MessageBox.Show("Заполните каптчу корректно!");
+                        return;
+                    }
             }
+        }
+            
             MessageBox.Show("Вы успешно прошли каптчу!");
-            MainForm mainForm = new MainForm();
-            mainForm.Show();
-            this.Hide();
+
+            DialogResult = DialogResult.OK;
+                        
+            Close();
         }
     }
 }
