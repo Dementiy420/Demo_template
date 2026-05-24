@@ -15,12 +15,12 @@ namespace Demo_template
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            //вызов формы авторизации как диалогового окна (для избежания Hide(), который не завершает полностью работу программы)
             using (Login loginForm = new Login()) 
             {
                 if (loginForm.ShowDialog() == DialogResult.OK) 
-                {
-                        if (loginForm.ShowDialog() == DialogResult.OK)                    
-                            Application.Run(new MainForm());
+                {          
+                    Application.Run(new MainForm());
                 }
             }
         }
