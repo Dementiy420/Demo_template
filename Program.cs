@@ -19,8 +19,13 @@ namespace Demo_template
             using (Login loginForm = new Login()) 
             {
                 if (loginForm.ShowDialog() == DialogResult.OK) 
-                {          
-                    Application.Run(new MainForm(Role.UserRole));
+                {
+                    string role = loginForm.SendRole();
+
+                    MainForm mainForm = new MainForm();
+                    mainForm.Role = role;
+
+                    Application.Run(mainForm);
                 }
             }
         }

@@ -8,6 +8,7 @@ namespace Demo_template
 {
     public partial class Login : Form
     {
+        string role;
         public Login() => InitializeComponent();
 
         private void button1_Click(object sender, EventArgs e)
@@ -33,7 +34,7 @@ namespace Demo_template
                 if (reader.Read()) // проверка на совпадение логинов
                 {
                     int attempts = reader.GetInt32("Captcha_attempts"); // парсинг строки "Попытки"
-                    string role = reader.GetString("Role");
+                     role = reader.GetString("Role");
 
                     if (reader.GetString("Password") == password) // Если пароли совпали                    
                         Authorize(attempts, login, role);
@@ -47,6 +48,8 @@ namespace Demo_template
                     MessageBox.Show("Пользователя не существует!");
             }
         }
+
+        public string SendRole() => role;        
 
         private void FailAuthorize(int attempts, string login, MySqlConnection connection)
         {
@@ -71,7 +74,6 @@ namespace Demo_template
                 if (captcha.ShowDialog() == DialogResult.OK) 
                 {
                     DialogResult = DialogResult.OK;
-                    Role.UserRole = role;
                 }
             }
         }

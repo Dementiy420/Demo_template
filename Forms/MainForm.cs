@@ -1,6 +1,8 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 
 
@@ -10,26 +12,27 @@ namespace Demo_template.Forms
     {
         string connectionString = "server=localhost;uid=root;pwd=root;database=mydb";
 
-        string _role;
+        Dictionary<string, DataGridView> grids = new Dictionary<string, DataGridView>();
 
-        public MainForm(string role)
-        {
-            _role = role;
+        public string Role { get; set; }
 
-            InitializeComponent();
-
-            if (_role == "User")
-            {
-                tabControl1.TabPages.Remove(tabPage1);
-            }
-        }
+        public MainForm() => InitializeComponent();        
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            if (Role == "User")
+                tabControl1.TabPages.Remove(tabPage1);
+
+            grids.Add("SELECT * FROM mydb.users", UsersGridView);
+            grids.Add("SELECT * FROM mydb.product", ProductGridView);
+            grids.Add("SELECT * FROM mydb.specification", SpecificationGridView);
+            grids.Add("SELECT * FROM mydb.order", OrdersGridView);
+            grids.Add("SELECT * FROM mydb.customers", customersGridView);
+
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 try
-                {
+                {             
                     connection.Open();
 
                     LoadData("SELECT * FROM mydb.users", UsersGridView);
@@ -47,11 +50,30 @@ namespace Demo_template.Forms
                 }
             }
         }
-        private void UsersSave_Click(object sender, EventArgs e) => UpdateData("SELECT * FROM mydb.users", UsersGridView);
-        private void ProductSave_Click(object sender, EventArgs e) => UpdateData("SELECT * FROM mydb.product", ProductGridView);
-        private void SpecificationSave_Click(object sender, EventArgs e) => UpdateData("SELECT * FROM mydb.specification", SpecificationGridView);
-        private void OrderSave_Click(object sender, EventArgs e) => UpdateData("SELECT * FROM mydb.order", OrdersGridView);
-        private void CustomersSave_Click(object sender, EventArgs e) => UpdateData("SELECT * FROM mydb.customers", customersGridView);
+        private void UsersSave_Click(object sender, EventArgs e) 
+        {
+            DataGridView grid = tabControl1.SelectedTab.Controls.OfType<DataGridView>().FirstOrDefault();
+
+            var command = grids.FirstOrDefault(g => g.Value == grid);
+
+            UpdateData(command.Key, command.Value);
+        }
+
+        private void DeleteRow_Click(object sender, EventArgs e) 
+        {
+            try
+            {
+                DataGridView grid = tabControl1.SelectedTab.Controls.OfType<DataGridView>().FirstOrDefault();
+
+                foreach (DataGridViewRow row in grid.SelectedRows)
+                    grid.Rows.Remove(row);
+            }
+            catch 
+            {
+                MessageBox.Show("Ошибка выполнения операции!");
+            }
+
+        }
 
         private void UpdateData(string command, DataGridView grid) 
         {
@@ -74,10 +96,11 @@ namespace Demo_template.Forms
                 catch (MySqlException ex)
                 {
                     if (ex.Number == 1062)
-                    {
                         MessageBox.Show("Ошибка! Пользователь уже существует в системе!");
-                    }
-
+                }
+                catch 
+                {
+                    MessageBox.Show("Ошибка выполнения операции!");
                 }
             }
         }
@@ -93,6 +116,13 @@ namespace Demo_template.Forms
                 adapter.Fill(dt);
                 grid.DataSource = dt;
             }                
+        }
+
+        private void тестированиеAPIToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TestAPI testForm = new TestAPI();
+
+            testForm.ShowDialog();
         }
     }
 }
