@@ -77,7 +77,7 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Ожидание результата проверки...";
             // 
-            // Form1
+            // TestAPI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -89,9 +89,8 @@
             this.Controls.Add(this.button1);
             this.MaximumSize = new System.Drawing.Size(900, 300);
             this.MinimumSize = new System.Drawing.Size(900, 300);
-            this.Name = "Form1";
+            this.Name = "TestAPI";
             this.Text = "Валидация данных";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

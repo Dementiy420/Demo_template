@@ -8,25 +8,14 @@ namespace Demo_template.Forms
 {
     public partial class TestAPI : Form
     {
-        private HttpClient _httpClient;
+        private HttpClient _httpClient = new HttpClient();
 
-        public TestAPI() {
-            InitializeComponent();
-        }
-
-        //При загрузке формы (2 нажатия по самой форме) происходит подключение к API
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            _httpClient = new HttpClient() 
-            {
-                BaseAddress = new Uri("http://localhost:4444/TransferSimulator/")
-            };
-        }
+        public TestAPI() => InitializeComponent();        
 
         //Кнопка получения ФИО
         private async void Button1_Click(object sender, EventArgs e)
         {
-            var responce = await _httpClient.GetAsync("fullName");
+            var responce = await _httpClient.GetAsync("http://localhost:4444/TransferSimulator/fullName");
             var result = await responce.Content.ReadFromJsonAsync<Message>();
 
             label1.Text = result.value;
@@ -35,12 +24,8 @@ namespace Demo_template.Forms
         //Кнопка валидации ФИО
         private void Button2_Click(object sender, EventArgs e)
         {
-            string value = label1.Text;
-
-            if (Regex.IsMatch(value, @"[^а-яА-я \-]"))
-            {
+            if (Regex.IsMatch(label1.Text, @"[^а-яА-я \-]"))
                 label2.Text = "ФИО содержит запрещенные символы";
-            }
             else
                 label2.Text = "ФИО не содержит запрещенные символы";
         }

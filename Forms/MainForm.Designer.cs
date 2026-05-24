@@ -45,6 +45,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.тестированиеAPIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.OpenOrderTable = new System.Windows.Forms.Button();
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.customersGridView)).BeginInit();
             this.tabPage4.SuspendLayout();
@@ -88,7 +89,7 @@
             this.tabPage5.Controls.Add(this.customersGridView);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(996, 242);
+            this.tabPage5.Size = new System.Drawing.Size(673, 319);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Поставщики";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -101,26 +102,29 @@
             this.customersGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customersGridView.Location = new System.Drawing.Point(0, 0);
             this.customersGridView.Name = "customersGridView";
-            this.customersGridView.Size = new System.Drawing.Size(996, 242);
+            this.customersGridView.Size = new System.Drawing.Size(673, 319);
             this.customersGridView.TabIndex = 3;
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.OpenOrderTable);
             this.tabPage4.Controls.Add(this.OrdersGridView);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(996, 242);
+            this.tabPage4.Size = new System.Drawing.Size(673, 319);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Заказы";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // OrdersGridView
             // 
+            this.OrdersGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.OrdersGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.OrdersGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.OrdersGridView.Location = new System.Drawing.Point(0, 0);
             this.OrdersGridView.Name = "OrdersGridView";
-            this.OrdersGridView.Size = new System.Drawing.Size(996, 242);
+            this.OrdersGridView.Size = new System.Drawing.Size(673, 286);
             this.OrdersGridView.TabIndex = 2;
             // 
             // tabPage3
@@ -128,7 +132,7 @@
             this.tabPage3.Controls.Add(this.SpecificationGridView);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(996, 242);
+            this.tabPage3.Size = new System.Drawing.Size(673, 319);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Спецификации";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -139,7 +143,7 @@
             this.SpecificationGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SpecificationGridView.Location = new System.Drawing.Point(0, 0);
             this.SpecificationGridView.Name = "SpecificationGridView";
-            this.SpecificationGridView.Size = new System.Drawing.Size(996, 242);
+            this.SpecificationGridView.Size = new System.Drawing.Size(673, 319);
             this.SpecificationGridView.TabIndex = 1;
             // 
             // tabPage6
@@ -147,7 +151,7 @@
             this.tabPage6.Controls.Add(this.MaterialsGridView);
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Size = new System.Drawing.Size(996, 242);
+            this.tabPage6.Size = new System.Drawing.Size(673, 319);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "Материалы";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -158,7 +162,7 @@
             this.MaterialsGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MaterialsGridView.Location = new System.Drawing.Point(0, 0);
             this.MaterialsGridView.Name = "MaterialsGridView";
-            this.MaterialsGridView.Size = new System.Drawing.Size(996, 242);
+            this.MaterialsGridView.Size = new System.Drawing.Size(673, 319);
             this.MaterialsGridView.TabIndex = 1;
             // 
             // tabPage2
@@ -167,7 +171,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(996, 242);
+            this.tabPage2.Size = new System.Drawing.Size(673, 319);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Продукты";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -178,7 +182,7 @@
             this.ProductGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ProductGridView.Location = new System.Drawing.Point(3, 3);
             this.ProductGridView.Name = "ProductGridView";
-            this.ProductGridView.Size = new System.Drawing.Size(990, 236);
+            this.ProductGridView.Size = new System.Drawing.Size(667, 313);
             this.ProductGridView.TabIndex = 0;
             // 
             // tabPage1
@@ -241,6 +245,17 @@
             this.тестированиеAPIToolStripMenuItem.Text = "Тестирование API";
             this.тестированиеAPIToolStripMenuItem.Click += new System.EventHandler(this.тестированиеAPIToolStripMenuItem_Click);
             // 
+            // OpenOrderTable
+            // 
+            this.OpenOrderTable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.OpenOrderTable.Location = new System.Drawing.Point(546, 292);
+            this.OpenOrderTable.Name = "OpenOrderTable";
+            this.OpenOrderTable.Size = new System.Drawing.Size(122, 23);
+            this.OpenOrderTable.TabIndex = 3;
+            this.OpenOrderTable.Text = "Рассчитать заказы";
+            this.OpenOrderTable.UseVisualStyleBackColor = true;
+            this.OpenOrderTable.Click += new System.EventHandler(this.OpenOrderTable_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -292,5 +307,6 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem тестированиеAPIToolStripMenuItem;
+        private System.Windows.Forms.Button OpenOrderTable;
     }
 }

@@ -31,7 +31,6 @@ namespace Demo_template.Forms
         // метод для перетаскиваемых PictureBox при зажатии кнопки мыши. Назначаются в событиях для вытаскиваемых PictureBox
         private void image_MouseDown(object sender, MouseEventArgs e)
         {
-            //var pictureBox = (PictureBox)sender; // сохранение перетаскиваемого объекта в переменной
             // захват элемента для переноса. В первом аргументе сам объект, а во втором что перетаскиваем (т.к. элемент то Move)
             pictureBox3.DoDragDrop((PictureBox)sender, DragDropEffects.Move); 
         }

@@ -119,6 +119,7 @@
             this.Password_Entry.Name = "Password_Entry";
             this.Password_Entry.Size = new System.Drawing.Size(336, 29);
             this.Password_Entry.TabIndex = 2;
+            this.Password_Entry.UseSystemPasswordChar = true;
             // 
             // Login_Entry
             // 

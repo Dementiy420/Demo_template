@@ -28,6 +28,8 @@ namespace Demo_template.Forms
             grids.Add("SELECT * FROM mydb.specification", SpecificationGridView);
             grids.Add("SELECT * FROM mydb.order", OrdersGridView);
             grids.Add("SELECT * FROM mydb.customers", customersGridView);
+            grids.Add("SELECT * FROM mydb.material", MaterialsGridView);
+
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -65,8 +67,12 @@ namespace Demo_template.Forms
             {
                 DataGridView grid = tabControl1.SelectedTab.Controls.OfType<DataGridView>().FirstOrDefault();
 
-                foreach (DataGridViewRow row in grid.SelectedRows)
+                foreach (DataGridViewRow row in grid.SelectedRows) 
+                {
                     grid.Rows.Remove(row);
+                }
+                MessageBox.Show("Данные удалены!");
+
             }
             catch 
             {
@@ -75,7 +81,7 @@ namespace Demo_template.Forms
 
         }
 
-        private void UpdateData(string command, DataGridView grid) 
+        private void UpdateData(string command, DataGridView grid)
         {
             using (MySqlConnection connection = new MySqlConnection(connectionString)) 
             {
@@ -92,15 +98,15 @@ namespace Demo_template.Forms
                     dt.AcceptChanges();
 
                     MessageBox.Show("Данные были успешно сохранены!");
+
+                    connection.Close();
                 }
                 catch (MySqlException ex)
                 {
                     if (ex.Number == 1062)
                         MessageBox.Show("Ошибка! Пользователь уже существует в системе!");
-                }
-                catch 
-                {
-                    MessageBox.Show("Ошибка выполнения операции!");
+                    else
+                        MessageBox.Show($"Error: {ex.Message}");
                 }
             }
         }
@@ -123,6 +129,14 @@ namespace Demo_template.Forms
             TestAPI testForm = new TestAPI();
 
             testForm.ShowDialog();
+        }
+
+        private void OpenOrderTable_Click(object sender, EventArgs e)
+        {
+            using(OrdersForm ordersForm = new OrdersForm()) 
+            {
+                ordersForm.ShowDialog();
+            }
         }
     }
 }
