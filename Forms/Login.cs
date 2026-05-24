@@ -27,15 +27,16 @@ namespace Demo_template
                 connection.Open();
 
                 //Выполнение команды SELECT (чтение)
-                MySqlCommand verificationCommand = new MySqlCommand($"SELECT Password, Captcha_attempts FROM mydb.users WHERE Login = '{login}';", connection);
+                MySqlCommand verificationCommand = new MySqlCommand($"SELECT Password, Captcha_attempts, Role FROM mydb.users WHERE Login = '{login}';", connection);
                 MySqlDataReader reader = verificationCommand.ExecuteReader();
 
                 if (reader.Read()) // проверка на совпадение логинов
                 {
                     int attempts = reader.GetInt32("Captcha_attempts"); // парсинг строки "Попытки"
+                    string role = reader.GetString("Role");
 
                     if (reader.GetString("Password") == password) // Если пароли совпали                    
-                        Authorize(attempts, login);
+                        Authorize(attempts, login, role);
                     else 
                     {
                         reader.Close();
@@ -55,7 +56,7 @@ namespace Demo_template
             MessageBox.Show($"Введен неверный пароль! Осталось попыток: {attempts - 1}");
         }
 
-        private void Authorize(int attempts, string login) 
+        private void Authorize(int attempts, string login, string role) 
         {
             if (attempts <= 0) // проверка на блокировку
             {
@@ -67,8 +68,11 @@ namespace Demo_template
 
             using (var captcha = new Captcha(login, attempts)) //Открываем Каптчу как диалоговое окно
             {
-                if (captcha.ShowDialog() == DialogResult.OK)
-                    DialogResult = DialogResult.OK; // такая же строка должна быть в форме каптчи при успехе
+                if (captcha.ShowDialog() == DialogResult.OK) 
+                {
+                    DialogResult = DialogResult.OK;
+                    Role.UserRole = role;
+                }
             }
         }
 

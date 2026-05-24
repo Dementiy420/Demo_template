@@ -20,7 +20,7 @@ namespace Demo_template
             {
                 if (loginForm.ShowDialog() == DialogResult.OK) 
                 {          
-                    Application.Run(new MainForm());
+                    Application.Run(new MainForm(Role.UserRole));
                 }
             }
         }

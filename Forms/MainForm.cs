@@ -10,13 +10,15 @@ namespace Demo_template.Forms
     {
         string connectionString = "server=localhost;uid=root;pwd=root;database=mydb";
 
-        string _role = "User";
+        string _role;
 
-        public MainForm()
+        public MainForm(string role)
         {
+            _role = role;
+
             InitializeComponent();
 
-            if (_role == "User") 
+            if (_role == "User")
             {
                 tabControl1.TabPages.Remove(tabPage1);
             }
@@ -35,13 +37,13 @@ namespace Demo_template.Forms
                     LoadData("SELECT * FROM mydb.specification", SpecificationGridView);
                     LoadData("SELECT * FROM mydb.order", OrdersGridView);
                     LoadData("SELECT * FROM mydb.customers", customersGridView);
-                    LoadData("SELECT * FROM mydb.materials", MaterialsGridView);
+                    LoadData("SELECT * FROM mydb.material", MaterialsGridView);                    
 
                     MessageBox.Show("Подключение к БД прошло успешно!");
                 }
-                catch
+                catch (MySqlException ex)
                 {
-                    MessageBox.Show("Не удалось подключиться к базе данных!");
+                    MessageBox.Show(ex.Message);
                 }
             }
         }
