@@ -7,7 +7,7 @@ namespace Demo_template
 {
     public partial class Login : Form
     {
-        string role;
+        string role; // хранение роли
         public Login() => InitializeComponent();
 
         private void button1_Click(object sender, EventArgs e)
@@ -17,7 +17,7 @@ namespace Demo_template
 
             if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password))
             {
-                MessageBox.Show("Поля не должны быть пустыми!");
+                MessageBox.Show("Поля не должны быть пустыми!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -33,7 +33,13 @@ namespace Demo_template
                 if (reader.Read()) // проверка на совпадение логинов
                 {
                     int attempts = reader.GetInt32("Captcha_attempts"); // парсинг строки "Попытки"
-                     role = reader.GetString("Role");
+                    role = reader.GetString("Role");
+
+                    if (attempts <= 0) // проверка на блокировку
+                    {
+                        MessageBox.Show("Вы заблокированы! Обратитесь к администратору.", "Превышено количество попыток!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
 
                     if (reader.GetString("Password") == password) // Если пароли совпали                    
                         Authorize(attempts, login, role);
@@ -44,29 +50,24 @@ namespace Demo_template
                     }
                 }
                 else
-                    MessageBox.Show("Пользователя не существует!");
+                    MessageBox.Show("Пользователя не существует!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        public string SendRole() => role;        
+        public string SendRole() => role; // метод для передачи роли в главную форму        
 
         private void FailAuthorize(int attempts, string login, MySqlConnection connection)
         {
             //Выполнение команды UPDATE
             using (var updateCommand = new MySqlCommand($"UPDATE mydb.users SET Captcha_attempts = Captcha_attempts - 1 WHERE Login = '{login}';", connection))
                 updateCommand.ExecuteNonQuery();
-            MessageBox.Show($"Введен неверный пароль! Осталось попыток: {attempts - 1}");
+
+            MessageBox.Show($"Вы ввели неверный логин или пароль. Пожалуйста проверьте ещё раз введенные данные!\nОсталось попыток: {attempts-1}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void Authorize(int attempts, string login, string role) 
-        {
-            if (attempts <= 0) // проверка на блокировку
-            {
-                MessageBox.Show("Вы заблокированы! Обратитесь к администратору");
-                return;
-            }
-            
-            MessageBox.Show("Вход совершен успешно!");
+        {            
+            MessageBox.Show("Вы успешно авторизовались!", "Уведомление", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             using (var captcha = new Captcha(login, attempts)) //Открываем Каптчу как диалоговое окно
             {
@@ -76,6 +77,5 @@ namespace Demo_template
                 }
             }
         }
-
     }
 }
