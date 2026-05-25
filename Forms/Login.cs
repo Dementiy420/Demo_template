@@ -28,6 +28,7 @@ namespace Demo_template
 
                 //Выполнение команды SELECT (чтение)
                 MySqlCommand verificationCommand = new MySqlCommand($"SELECT Password, Captcha_attempts, Role FROM mydb.users WHERE Login = '{login}';", connection);
+                // Получение данных из БД
                 MySqlDataReader reader = verificationCommand.ExecuteReader();
 
                 if (reader.Read()) // проверка на совпадение логинов
@@ -68,6 +69,12 @@ namespace Demo_template
         private void Authorize(int attempts, string login, string role) 
         {            
             MessageBox.Show("Вы успешно авторизовались!", "Уведомление", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            if (role == "Admin") // обход каптчи для админов
+            {
+                DialogResult = DialogResult.OK;
+                return;
+            }
 
             using (var captcha = new Captcha(login, attempts)) //Открываем Каптчу как диалоговое окно
             {

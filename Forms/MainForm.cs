@@ -30,7 +30,6 @@ namespace Demo_template.Forms
             grids.Add("SELECT * FROM mydb.customers", customersGridView);
             grids.Add("SELECT * FROM mydb.material", MaterialsGridView);
 
-
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 try
@@ -90,6 +89,7 @@ namespace Demo_template.Forms
                     connection.Open();
 
                     MySqlDataAdapter adapter = new MySqlDataAdapter(command, connection);
+                    
                     MySqlCommandBuilder builder = new MySqlCommandBuilder(adapter);
 
                     DataTable dt = grid.DataSource as DataTable;

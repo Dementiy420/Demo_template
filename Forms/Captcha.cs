@@ -20,7 +20,7 @@ namespace Demo_template.Forms
         public Captcha(string Login, int Attempts) 
         {
             InitializeComponent();        
-            picture_1.AllowDrop = true;
+            picture_1.AllowDrop = true; // разрешение на перетаскивание для элементов каптчи
             picture_2.AllowDrop = true;
             picture_3.AllowDrop = true;
             picture_4.AllowDrop = true;
@@ -58,7 +58,7 @@ namespace Demo_template.Forms
         {
             if (attemps <= 0) // при недостатке попыток закрытие формы
             {
-                MessageBox.Show("Вы заблокированы! Обратитесь к администратору!");
+                MessageBox.Show("Вы заблокированы! Обратитесь к администратору!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DialogResult = DialogResult.Cancel;
                 return;
             }
@@ -89,7 +89,7 @@ namespace Demo_template.Forms
                     }
                     catch // Если не заполнили элемент/ы
                     {
-                        MessageBox.Show("Заполните каптчу корректно!");
+                        MessageBox.Show("Заполните каптчу корректно!", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                 }
