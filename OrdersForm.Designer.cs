@@ -28,31 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.OdersGridView = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.OdersGridView)).BeginInit();
-            this.SuspendLayout();
+            OdersGridView = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)OdersGridView).BeginInit();
+            SuspendLayout();
             // 
             // OdersGridView
             // 
-            this.OdersGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.OdersGridView.Location = new System.Drawing.Point(12, 12);
-            this.OdersGridView.Name = "OdersGridView";
-            this.OdersGridView.Size = new System.Drawing.Size(760, 437);
-            this.OdersGridView.TabIndex = 0;
+            OdersGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            OdersGridView.Location = new Point(14, 14);
+            OdersGridView.Margin = new Padding(4, 3, 4, 3);
+            OdersGridView.Name = "OdersGridView";
+            OdersGridView.Size = new Size(887, 504);
+            OdersGridView.TabIndex = 0;
             // 
             // OrdersForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 461);
-            this.Controls.Add(this.OdersGridView);
-            this.MaximumSize = new System.Drawing.Size(800, 500);
-            this.MinimumSize = new System.Drawing.Size(800, 500);
-            this.Name = "OrdersForm";
-            this.Text = "OrdersForm";
-            this.Load += new System.EventHandler(this.OrdersForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.OdersGridView)).EndInit();
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(915, 532);
+            Controls.Add(OdersGridView);
+            Margin = new Padding(4, 3, 4, 3);
+            MaximumSize = new Size(931, 571);
+            MinimumSize = new Size(931, 571);
+            Name = "OrdersForm";
+            Text = "OrdersForm";
+            FormClosed += OrdersForm_FormClosed;
+            ((System.ComponentModel.ISupportInitialize)OdersGridView).EndInit();
+            ResumeLayout(false);
 
         }
 

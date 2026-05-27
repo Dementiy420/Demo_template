@@ -1,37 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Demo_entity.Database;
+using Demo_entity.Models;
 using System.Data;
-using System.Linq;
-using System.Windows.Forms;
 
 namespace Demo_template.Forms
 {
     public partial class Captcha : Form
     {
-        //строки для хранения логина и пароля
-        string login;
-        int attemps;
+        public string Role;
 
+        private User user;
+        private MydbContext context;
         //список тегов для определения правильной каптчи
-        List<string> tags = new List<string>(){"picture_1", "picture_2", "picture_3", "picture_4"};
+        List<string> tags = new List<string>() { "picture_1", "picture_2", "picture_3", "picture_4" };
 
         // конструктор для передачи данных из формы "Логин" и разрешение на перетаскивание в pictureBox
-        public Captcha(string Login, int Attempts) 
+        public Captcha(User user, MydbContext context)
         {
-            InitializeComponent();        
+            InitializeComponent();
             picture_1.AllowDrop = true; // разрешение на перетаскивание для элементов каптчи
             picture_2.AllowDrop = true;
             picture_3.AllowDrop = true;
             picture_4.AllowDrop = true;
-            login = Login;
-            attemps = Attempts;
+            this.user = user;
+            this.context = context;
+
         }
 
         // метод для перетаскиваемых PictureBox при зажатии кнопки мыши. Назначаются в событиях для вытаскиваемых PictureBox
         private void image_MouseDown(object sender, MouseEventArgs e)
         {
             // захват элемента для переноса. В первом аргументе сам объект, а во втором что перетаскиваем (т.к. элемент то Move)
-            ((PictureBox)sender).DoDragDrop((PictureBox)sender, DragDropEffects.Move); 
+            ((PictureBox)sender).DoDragDrop((PictureBox)sender, DragDropEffects.Move);
         }
 
         // Событие при перетаскивании объекта мышью при ходе в объект. Присваивается элементу каптчи куда надо перенести картинку
@@ -42,10 +41,10 @@ namespace Demo_template.Forms
         }
 
         // Событие при отпуске мыши в элементе, куда нужно вставить PictureBox
-        private void image_DragDrop(object sender, DragEventArgs e) 
+        private void image_DragDrop(object sender, DragEventArgs e)
         {
             // сохранение перетаскиваемого элемента из данных и получение
-            PictureBox sourcePictureBox = e.Data.GetData(typeof(PictureBox)) as PictureBox;   
+            PictureBox sourcePictureBox = e.Data.GetData(typeof(PictureBox)) as PictureBox;
             PictureBox targetPictureBox = (PictureBox)sender;
             // присваивание необходимых атрибутов для пустой ячейки
             targetPictureBox.Image = sourcePictureBox.Image;
@@ -55,40 +54,47 @@ namespace Demo_template.Forms
         //Обработчик события прохождения каптчи
         private void SendCaptcha_Click(object sender, EventArgs e)
         {
-            if (attemps <= 0) // при недостатке попыток закрытие формы
-            {
-                MessageBox.Show("Вы заблокированы! Обратитесь к администратору!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                DialogResult = DialogResult.Cancel;
-                return;
-            }
-
             //сортировка элементов каптчи по порядку
             List<PictureBox> elements = tableLayoutPanel1.Controls.Cast<PictureBox>().
             OrderBy(c => tableLayoutPanel1.GetRow(c)).
             ThenBy(c => tableLayoutPanel2.GetColumn(c)).ToList();
 
-            //Цикл для проверки элементов каптчи
-            for (int i = 0; i < 4; i++)
-            {                    
-                try // обработка исключения для незаполненных элементов каптчи
-                {
-                    if (elements[i].Tag.ToString() != tags[i]) // проверка по тегу элемента
-                    {
-                        --attemps; 
-                        MessageBox.Show($"Капча собрана неверно! Осталось попыток: {attemps}");
-                        return;
-                    }
-                }
-                catch // Если не заполнили элемент/ы
-                {
-                    MessageBox.Show("Заполните каптчу корректно!", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-            }            
+            int rightImages = 0;
 
-            //При совпадении всех тегов в каптче
-            MessageBox.Show("Вы успешно прошли каптчу!");
-            DialogResult = DialogResult.OK;                    
+            try
+            {
+                if (user.CaptchaAttempts <= 0) // при недостатке попыток закрытие формы
+                    throw new Exception("Вы заблокированы! обратитесь к администратору!");
+
+                //Цикл для проверки элементов каптчи
+                for (int i = 0; i < 4; i++)
+                    if (elements[i].Tag.ToString() == tags[i]) // проверка по тегу элемента                    
+                        rightImages += 1;
+
+                if (rightImages != 4) 
+                {
+                    user.CaptchaAttempts -= 1;
+                    throw new Exception($"Каптча заполнена неверно!\nПопыток осталось: {user.CaptchaAttempts}");
+                }
+
+                //При совпадении всех тегов в каптче
+                Role = user.Role;
+                MessageBox.Show("Вы успешно прошли каптчу!");
+                DialogResult = DialogResult.OK;
+            }
+            catch (NullReferenceException) 
+            {
+                MessageBox.Show($"Каптча заполнена не полностью!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DialogResult = DialogResult.None;
+                return;
+            }
+            catch (Exception ex)
+            {
+                context.SaveChanges();
+                MessageBox.Show(ex.Message, "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DialogResult = DialogResult.None;
+                return;
+            }
         }
     }
 }

@@ -16,24 +16,21 @@ namespace Demo_entity
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             
-            MainForm mainForm = new MainForm();
-            
-            Application.Run(mainForm);
 
 
-            //вызов формы авторизации как диалогового окна (для избежания Hide(), который не завершает полностью работу программы)
-            //using (Login loginForm = new Login())
-            //{
-            //    if (loginForm.ShowDialog() == DialogResult.OK)
-            //    {
-            //        string role = loginForm.SendRole();
+            //вызов формы авторизации как диалогового окна(для избежания Hide(), который не завершает полностью работу программы)
+            using (Login loginForm = new Login())
+            {
+                if (loginForm.ShowDialog() == DialogResult.OK)
+                {
+                    string role = loginForm.SendRole();
 
-            //        MainForm mainForm = new MainForm();
-            //        mainForm.Role = role;
+                    MainForm mainForm = new MainForm();
+                    mainForm.Role = role;
 
-            //        Application.Run(mainForm);
-            //    }
-            //}
+                    Application.Run(mainForm);
+                }
+            }
         }
     }
 }

@@ -29,49 +29,27 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            usersSave = new Button();
+            SaveData = new Button();
             button3 = new Button();
             tabPage5 = new TabPage();
             customersGridView = new DataGridView();
-            idDataGridViewTextBoxColumn5 = new DataGridViewTextBoxColumn();
-            nameDataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
-            innDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            addresDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            salesmanDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            buyerDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            phoneDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             customerBindingSource = new BindingSource(components);
             tabPage4 = new TabPage();
             OpenOrderTable = new Button();
             OrdersGridView = new DataGridView();
-            idDataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
-            salesmanIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            productIdDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            dateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            valueproductDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             orderBindingSource = new BindingSource(components);
             tabPage3 = new TabPage();
             SpecificationGridView = new DataGridView();
-            idDataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
-            customersIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            productIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            materialIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             specificationBindingSource = new BindingSource(components);
             tabPage6 = new TabPage();
             MaterialsGridView = new DataGridView();
-            idDataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
-            nameDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            priceDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            weightDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             materialBindingSource = new BindingSource(components);
             tabPage2 = new TabPage();
             ProductGridView = new DataGridView();
-            idDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            priceDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             productBindingSource = new BindingSource(components);
             tabPage1 = new TabPage();
             UsersGridView = new DataGridView();
+            Id = new DataGridViewTextBoxColumn();
             loginDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             passwordDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             roleDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -80,6 +58,29 @@
             tabControl1 = new TabControl();
             menuStrip1 = new MenuStrip();
             тестированиеAPIToolStripMenuItem = new ToolStripMenuItem();
+            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            priceDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
+            nameDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            priceDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            weightDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
+            customersIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            productIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            materialIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
+            salesmanIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            productIdDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            dateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            valueproductDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn5 = new DataGridViewTextBoxColumn();
+            nameDataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
+            innDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            addresDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            salesmanDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            buyerDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            phoneDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)customersGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customerBindingSource).BeginInit();
@@ -102,17 +103,17 @@
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
-            // usersSave
+            // SaveData
             // 
-            usersSave.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            usersSave.Location = new Point(8, 448);
-            usersSave.Margin = new Padding(4, 3, 4, 3);
-            usersSave.Name = "usersSave";
-            usersSave.Size = new Size(147, 43);
-            usersSave.TabIndex = 1;
-            usersSave.Text = "Сохранить данные";
-            usersSave.UseVisualStyleBackColor = true;
-            usersSave.Click += UsersSave_Click;
+            SaveData.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            SaveData.Location = new Point(8, 448);
+            SaveData.Margin = new Padding(4, 3, 4, 3);
+            SaveData.Name = "SaveData";
+            SaveData.Size = new Size(147, 43);
+            SaveData.TabIndex = 1;
+            SaveData.Text = "Сохранить данные";
+            SaveData.UseVisualStyleBackColor = true;
+            SaveData.Click += SaveData_Click;
             // 
             // button3
             // 
@@ -143,7 +144,7 @@
             customersGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             customersGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             customersGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            customersGridView.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn5, nameDataGridViewTextBoxColumn2, innDataGridViewTextBoxColumn, addresDataGridViewTextBoxColumn, salesmanDataGridViewTextBoxColumn1, buyerDataGridViewTextBoxColumn, phoneDataGridViewTextBoxColumn });
+            customersGridView.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn5, nameDataGridViewTextBoxColumn2, innDataGridViewTextBoxColumn, addresDataGridViewTextBoxColumn, salesmanDataGridViewTextBoxColumn1, buyerDataGridViewTextBoxColumn, phoneDataGridViewTextBoxColumn });
             customersGridView.DataSource = customerBindingSource;
             customersGridView.Dock = DockStyle.Fill;
             customersGridView.Location = new Point(0, 0);
@@ -151,48 +152,6 @@
             customersGridView.Name = "customersGridView";
             customersGridView.Size = new Size(786, 370);
             customersGridView.TabIndex = 3;
-            // 
-            // idDataGridViewTextBoxColumn5
-            // 
-            idDataGridViewTextBoxColumn5.DataPropertyName = "Id";
-            idDataGridViewTextBoxColumn5.HeaderText = "Id";
-            idDataGridViewTextBoxColumn5.Name = "idDataGridViewTextBoxColumn5";
-            // 
-            // nameDataGridViewTextBoxColumn2
-            // 
-            nameDataGridViewTextBoxColumn2.DataPropertyName = "Name";
-            nameDataGridViewTextBoxColumn2.HeaderText = "Name";
-            nameDataGridViewTextBoxColumn2.Name = "nameDataGridViewTextBoxColumn2";
-            // 
-            // innDataGridViewTextBoxColumn
-            // 
-            innDataGridViewTextBoxColumn.DataPropertyName = "Inn";
-            innDataGridViewTextBoxColumn.HeaderText = "Inn";
-            innDataGridViewTextBoxColumn.Name = "innDataGridViewTextBoxColumn";
-            // 
-            // addresDataGridViewTextBoxColumn
-            // 
-            addresDataGridViewTextBoxColumn.DataPropertyName = "Addres";
-            addresDataGridViewTextBoxColumn.HeaderText = "Addres";
-            addresDataGridViewTextBoxColumn.Name = "addresDataGridViewTextBoxColumn";
-            // 
-            // salesmanDataGridViewTextBoxColumn1
-            // 
-            salesmanDataGridViewTextBoxColumn1.DataPropertyName = "Salesman";
-            salesmanDataGridViewTextBoxColumn1.HeaderText = "Salesman";
-            salesmanDataGridViewTextBoxColumn1.Name = "salesmanDataGridViewTextBoxColumn1";
-            // 
-            // buyerDataGridViewTextBoxColumn
-            // 
-            buyerDataGridViewTextBoxColumn.DataPropertyName = "Buyer";
-            buyerDataGridViewTextBoxColumn.HeaderText = "Buyer";
-            buyerDataGridViewTextBoxColumn.Name = "buyerDataGridViewTextBoxColumn";
-            // 
-            // phoneDataGridViewTextBoxColumn
-            // 
-            phoneDataGridViewTextBoxColumn.DataPropertyName = "Phone";
-            phoneDataGridViewTextBoxColumn.HeaderText = "Phone";
-            phoneDataGridViewTextBoxColumn.Name = "phoneDataGridViewTextBoxColumn";
             // 
             // customerBindingSource
             // 
@@ -228,43 +187,13 @@
             OrdersGridView.AutoGenerateColumns = false;
             OrdersGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             OrdersGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            OrdersGridView.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn4, salesmanIdDataGridViewTextBoxColumn, productIdDataGridViewTextBoxColumn1, dateDataGridViewTextBoxColumn, valueproductDataGridViewTextBoxColumn });
+            OrdersGridView.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn4, salesmanIdDataGridViewTextBoxColumn, productIdDataGridViewTextBoxColumn1, dateDataGridViewTextBoxColumn, valueproductDataGridViewTextBoxColumn });
             OrdersGridView.DataSource = orderBindingSource;
             OrdersGridView.Location = new Point(0, 0);
             OrdersGridView.Margin = new Padding(4, 3, 4, 3);
             OrdersGridView.Name = "OrdersGridView";
             OrdersGridView.Size = new Size(785, 330);
             OrdersGridView.TabIndex = 2;
-            // 
-            // idDataGridViewTextBoxColumn4
-            // 
-            idDataGridViewTextBoxColumn4.DataPropertyName = "Id";
-            idDataGridViewTextBoxColumn4.HeaderText = "Id";
-            idDataGridViewTextBoxColumn4.Name = "idDataGridViewTextBoxColumn4";
-            // 
-            // salesmanIdDataGridViewTextBoxColumn
-            // 
-            salesmanIdDataGridViewTextBoxColumn.DataPropertyName = "SalesmanId";
-            salesmanIdDataGridViewTextBoxColumn.HeaderText = "SalesmanId";
-            salesmanIdDataGridViewTextBoxColumn.Name = "salesmanIdDataGridViewTextBoxColumn";
-            // 
-            // productIdDataGridViewTextBoxColumn1
-            // 
-            productIdDataGridViewTextBoxColumn1.DataPropertyName = "ProductId";
-            productIdDataGridViewTextBoxColumn1.HeaderText = "ProductId";
-            productIdDataGridViewTextBoxColumn1.Name = "productIdDataGridViewTextBoxColumn1";
-            // 
-            // dateDataGridViewTextBoxColumn
-            // 
-            dateDataGridViewTextBoxColumn.DataPropertyName = "Date";
-            dateDataGridViewTextBoxColumn.HeaderText = "Date";
-            dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
-            // 
-            // valueproductDataGridViewTextBoxColumn
-            // 
-            valueproductDataGridViewTextBoxColumn.DataPropertyName = "Valueproduct";
-            valueproductDataGridViewTextBoxColumn.HeaderText = "Valueproduct";
-            valueproductDataGridViewTextBoxColumn.Name = "valueproductDataGridViewTextBoxColumn";
             // 
             // orderBindingSource
             // 
@@ -286,7 +215,7 @@
             SpecificationGridView.AutoGenerateColumns = false;
             SpecificationGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             SpecificationGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            SpecificationGridView.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn3, customersIdDataGridViewTextBoxColumn, productIdDataGridViewTextBoxColumn, materialIdDataGridViewTextBoxColumn });
+            SpecificationGridView.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn3, customersIdDataGridViewTextBoxColumn, productIdDataGridViewTextBoxColumn, materialIdDataGridViewTextBoxColumn });
             SpecificationGridView.DataSource = specificationBindingSource;
             SpecificationGridView.Dock = DockStyle.Fill;
             SpecificationGridView.Location = new Point(0, 0);
@@ -294,30 +223,6 @@
             SpecificationGridView.Name = "SpecificationGridView";
             SpecificationGridView.Size = new Size(786, 370);
             SpecificationGridView.TabIndex = 1;
-            // 
-            // idDataGridViewTextBoxColumn3
-            // 
-            idDataGridViewTextBoxColumn3.DataPropertyName = "Id";
-            idDataGridViewTextBoxColumn3.HeaderText = "Id";
-            idDataGridViewTextBoxColumn3.Name = "idDataGridViewTextBoxColumn3";
-            // 
-            // customersIdDataGridViewTextBoxColumn
-            // 
-            customersIdDataGridViewTextBoxColumn.DataPropertyName = "CustomersId";
-            customersIdDataGridViewTextBoxColumn.HeaderText = "CustomersId";
-            customersIdDataGridViewTextBoxColumn.Name = "customersIdDataGridViewTextBoxColumn";
-            // 
-            // productIdDataGridViewTextBoxColumn
-            // 
-            productIdDataGridViewTextBoxColumn.DataPropertyName = "ProductId";
-            productIdDataGridViewTextBoxColumn.HeaderText = "ProductId";
-            productIdDataGridViewTextBoxColumn.Name = "productIdDataGridViewTextBoxColumn";
-            // 
-            // materialIdDataGridViewTextBoxColumn
-            // 
-            materialIdDataGridViewTextBoxColumn.DataPropertyName = "MaterialId";
-            materialIdDataGridViewTextBoxColumn.HeaderText = "MaterialId";
-            materialIdDataGridViewTextBoxColumn.Name = "materialIdDataGridViewTextBoxColumn";
             // 
             // specificationBindingSource
             // 
@@ -339,7 +244,7 @@
             MaterialsGridView.AutoGenerateColumns = false;
             MaterialsGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             MaterialsGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            MaterialsGridView.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn2, nameDataGridViewTextBoxColumn1, priceDataGridViewTextBoxColumn1, weightDataGridViewTextBoxColumn });
+            MaterialsGridView.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn2, nameDataGridViewTextBoxColumn1, priceDataGridViewTextBoxColumn1, weightDataGridViewTextBoxColumn });
             MaterialsGridView.DataSource = materialBindingSource;
             MaterialsGridView.Dock = DockStyle.Fill;
             MaterialsGridView.Location = new Point(0, 0);
@@ -347,30 +252,6 @@
             MaterialsGridView.Name = "MaterialsGridView";
             MaterialsGridView.Size = new Size(786, 370);
             MaterialsGridView.TabIndex = 1;
-            // 
-            // idDataGridViewTextBoxColumn2
-            // 
-            idDataGridViewTextBoxColumn2.DataPropertyName = "Id";
-            idDataGridViewTextBoxColumn2.HeaderText = "Id";
-            idDataGridViewTextBoxColumn2.Name = "idDataGridViewTextBoxColumn2";
-            // 
-            // nameDataGridViewTextBoxColumn1
-            // 
-            nameDataGridViewTextBoxColumn1.DataPropertyName = "Name";
-            nameDataGridViewTextBoxColumn1.HeaderText = "Name";
-            nameDataGridViewTextBoxColumn1.Name = "nameDataGridViewTextBoxColumn1";
-            // 
-            // priceDataGridViewTextBoxColumn1
-            // 
-            priceDataGridViewTextBoxColumn1.DataPropertyName = "Price";
-            priceDataGridViewTextBoxColumn1.HeaderText = "Price";
-            priceDataGridViewTextBoxColumn1.Name = "priceDataGridViewTextBoxColumn1";
-            // 
-            // weightDataGridViewTextBoxColumn
-            // 
-            weightDataGridViewTextBoxColumn.DataPropertyName = "Weight";
-            weightDataGridViewTextBoxColumn.HeaderText = "Weight";
-            weightDataGridViewTextBoxColumn.Name = "weightDataGridViewTextBoxColumn";
             // 
             // materialBindingSource
             // 
@@ -393,7 +274,7 @@
             ProductGridView.AutoGenerateColumns = false;
             ProductGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             ProductGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            ProductGridView.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn1, nameDataGridViewTextBoxColumn, priceDataGridViewTextBoxColumn });
+            ProductGridView.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, nameDataGridViewTextBoxColumn, priceDataGridViewTextBoxColumn });
             ProductGridView.DataSource = productBindingSource;
             ProductGridView.Dock = DockStyle.Fill;
             ProductGridView.Location = new Point(4, 3);
@@ -401,24 +282,6 @@
             ProductGridView.Name = "ProductGridView";
             ProductGridView.Size = new Size(778, 364);
             ProductGridView.TabIndex = 0;
-            // 
-            // idDataGridViewTextBoxColumn1
-            // 
-            idDataGridViewTextBoxColumn1.DataPropertyName = "Id";
-            idDataGridViewTextBoxColumn1.HeaderText = "Id";
-            idDataGridViewTextBoxColumn1.Name = "idDataGridViewTextBoxColumn1";
-            // 
-            // nameDataGridViewTextBoxColumn
-            // 
-            nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            nameDataGridViewTextBoxColumn.HeaderText = "Name";
-            nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            // 
-            // priceDataGridViewTextBoxColumn
-            // 
-            priceDataGridViewTextBoxColumn.DataPropertyName = "Price";
-            priceDataGridViewTextBoxColumn.HeaderText = "Price";
-            priceDataGridViewTextBoxColumn.Name = "priceDataGridViewTextBoxColumn";
             // 
             // productBindingSource
             // 
@@ -441,7 +304,7 @@
             UsersGridView.AutoGenerateColumns = false;
             UsersGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             UsersGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            UsersGridView.Columns.AddRange(new DataGridViewColumn[] { loginDataGridViewTextBoxColumn, passwordDataGridViewTextBoxColumn, roleDataGridViewTextBoxColumn, captchaAttemptsDataGridViewTextBoxColumn });
+            UsersGridView.Columns.AddRange(new DataGridViewColumn[] { Id, loginDataGridViewTextBoxColumn, passwordDataGridViewTextBoxColumn, roleDataGridViewTextBoxColumn, captchaAttemptsDataGridViewTextBoxColumn });
             UsersGridView.DataSource = userBindingSource;
             UsersGridView.Dock = DockStyle.Fill;
             UsersGridView.Location = new Point(4, 3);
@@ -451,6 +314,12 @@
             UsersGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             UsersGridView.Size = new Size(778, 364);
             UsersGridView.TabIndex = 0;
+            // 
+            // Id
+            // 
+            Id.DataPropertyName = "Id";
+            Id.HeaderText = "Id";
+            Id.Name = "Id";
             // 
             // loginDataGridViewTextBoxColumn
             // 
@@ -515,19 +384,158 @@
             тестированиеAPIToolStripMenuItem.Text = "Тестирование API";
             тестированиеAPIToolStripMenuItem.Click += тестированиеAPIToolStripMenuItem_Click;
             // 
+            // dataGridViewTextBoxColumn1
+            // 
+            dataGridViewTextBoxColumn1.DataPropertyName = "Id";
+            dataGridViewTextBoxColumn1.HeaderText = "Id";
+            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            // 
+            // priceDataGridViewTextBoxColumn
+            // 
+            priceDataGridViewTextBoxColumn.DataPropertyName = "Price";
+            priceDataGridViewTextBoxColumn.HeaderText = "Price";
+            priceDataGridViewTextBoxColumn.Name = "priceDataGridViewTextBoxColumn";
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            dataGridViewTextBoxColumn2.DataPropertyName = "Id";
+            dataGridViewTextBoxColumn2.HeaderText = "Id";
+            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            // 
+            // nameDataGridViewTextBoxColumn1
+            // 
+            nameDataGridViewTextBoxColumn1.DataPropertyName = "Name";
+            nameDataGridViewTextBoxColumn1.HeaderText = "Name";
+            nameDataGridViewTextBoxColumn1.Name = "nameDataGridViewTextBoxColumn1";
+            // 
+            // priceDataGridViewTextBoxColumn1
+            // 
+            priceDataGridViewTextBoxColumn1.DataPropertyName = "Price";
+            priceDataGridViewTextBoxColumn1.HeaderText = "Price";
+            priceDataGridViewTextBoxColumn1.Name = "priceDataGridViewTextBoxColumn1";
+            // 
+            // weightDataGridViewTextBoxColumn
+            // 
+            weightDataGridViewTextBoxColumn.DataPropertyName = "Weight";
+            weightDataGridViewTextBoxColumn.HeaderText = "Weight";
+            weightDataGridViewTextBoxColumn.Name = "weightDataGridViewTextBoxColumn";
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            dataGridViewTextBoxColumn3.DataPropertyName = "Id";
+            dataGridViewTextBoxColumn3.HeaderText = "Id";
+            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            // 
+            // customersIdDataGridViewTextBoxColumn
+            // 
+            customersIdDataGridViewTextBoxColumn.DataPropertyName = "CustomersId";
+            customersIdDataGridViewTextBoxColumn.HeaderText = "CustomersId";
+            customersIdDataGridViewTextBoxColumn.Name = "customersIdDataGridViewTextBoxColumn";
+            // 
+            // productIdDataGridViewTextBoxColumn
+            // 
+            productIdDataGridViewTextBoxColumn.DataPropertyName = "ProductId";
+            productIdDataGridViewTextBoxColumn.HeaderText = "ProductId";
+            productIdDataGridViewTextBoxColumn.Name = "productIdDataGridViewTextBoxColumn";
+            // 
+            // materialIdDataGridViewTextBoxColumn
+            // 
+            materialIdDataGridViewTextBoxColumn.DataPropertyName = "MaterialId";
+            materialIdDataGridViewTextBoxColumn.HeaderText = "MaterialId";
+            materialIdDataGridViewTextBoxColumn.Name = "materialIdDataGridViewTextBoxColumn";
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            dataGridViewTextBoxColumn4.DataPropertyName = "Id";
+            dataGridViewTextBoxColumn4.HeaderText = "Id";
+            dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            // 
+            // salesmanIdDataGridViewTextBoxColumn
+            // 
+            salesmanIdDataGridViewTextBoxColumn.DataPropertyName = "SalesmanId";
+            salesmanIdDataGridViewTextBoxColumn.HeaderText = "SalesmanId";
+            salesmanIdDataGridViewTextBoxColumn.Name = "salesmanIdDataGridViewTextBoxColumn";
+            // 
+            // productIdDataGridViewTextBoxColumn1
+            // 
+            productIdDataGridViewTextBoxColumn1.DataPropertyName = "ProductId";
+            productIdDataGridViewTextBoxColumn1.HeaderText = "ProductId";
+            productIdDataGridViewTextBoxColumn1.Name = "productIdDataGridViewTextBoxColumn1";
+            // 
+            // dateDataGridViewTextBoxColumn
+            // 
+            dateDataGridViewTextBoxColumn.DataPropertyName = "Date";
+            dateDataGridViewTextBoxColumn.HeaderText = "Date";
+            dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
+            // 
+            // valueproductDataGridViewTextBoxColumn
+            // 
+            valueproductDataGridViewTextBoxColumn.DataPropertyName = "Valueproduct";
+            valueproductDataGridViewTextBoxColumn.HeaderText = "Valueproduct";
+            valueproductDataGridViewTextBoxColumn.Name = "valueproductDataGridViewTextBoxColumn";
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            dataGridViewTextBoxColumn5.DataPropertyName = "Id";
+            dataGridViewTextBoxColumn5.HeaderText = "Id";
+            dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            // 
+            // nameDataGridViewTextBoxColumn2
+            // 
+            nameDataGridViewTextBoxColumn2.DataPropertyName = "Name";
+            nameDataGridViewTextBoxColumn2.HeaderText = "Name";
+            nameDataGridViewTextBoxColumn2.Name = "nameDataGridViewTextBoxColumn2";
+            // 
+            // innDataGridViewTextBoxColumn
+            // 
+            innDataGridViewTextBoxColumn.DataPropertyName = "Inn";
+            innDataGridViewTextBoxColumn.HeaderText = "Inn";
+            innDataGridViewTextBoxColumn.Name = "innDataGridViewTextBoxColumn";
+            // 
+            // addresDataGridViewTextBoxColumn
+            // 
+            addresDataGridViewTextBoxColumn.DataPropertyName = "Addres";
+            addresDataGridViewTextBoxColumn.HeaderText = "Addres";
+            addresDataGridViewTextBoxColumn.Name = "addresDataGridViewTextBoxColumn";
+            // 
+            // salesmanDataGridViewTextBoxColumn1
+            // 
+            salesmanDataGridViewTextBoxColumn1.DataPropertyName = "Salesman";
+            salesmanDataGridViewTextBoxColumn1.HeaderText = "Salesman";
+            salesmanDataGridViewTextBoxColumn1.Name = "salesmanDataGridViewTextBoxColumn1";
+            // 
+            // buyerDataGridViewTextBoxColumn
+            // 
+            buyerDataGridViewTextBoxColumn.DataPropertyName = "Buyer";
+            buyerDataGridViewTextBoxColumn.HeaderText = "Buyer";
+            buyerDataGridViewTextBoxColumn.Name = "buyerDataGridViewTextBoxColumn";
+            // 
+            // phoneDataGridViewTextBoxColumn
+            // 
+            phoneDataGridViewTextBoxColumn.DataPropertyName = "Phone";
+            phoneDataGridViewTextBoxColumn.HeaderText = "Phone";
+            phoneDataGridViewTextBoxColumn.Name = "phoneDataGridViewTextBoxColumn";
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(798, 532);
             Controls.Add(button3);
-            Controls.Add(usersSave);
+            Controls.Add(SaveData);
             Controls.Add(tabControl1);
             Controls.Add(menuStrip1);
             Margin = new Padding(4, 3, 4, 3);
             MinimumSize = new Size(814, 571);
             Name = "MainForm";
             Text = "MainForm";
+            FormClosing += MainForm_FormClosing;
             Load += MainForm_Load;
             tabPage5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)customersGridView).EndInit();
@@ -556,7 +564,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button usersSave;
+        private System.Windows.Forms.Button SaveData;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.DataGridView customersGridView;
@@ -576,36 +584,37 @@
         private System.Windows.Forms.Button OpenOrderTable;
         private BindingSource productBindingSource;
         private BindingSource userBindingSource;
-        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn5;
+        private BindingSource customerBindingSource;
+        private BindingSource orderBindingSource;
+        private BindingSource specificationBindingSource;
+        private BindingSource materialBindingSource;
+        private DataGridViewTextBoxColumn Id;
+        private DataGridViewTextBoxColumn loginDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn passwordDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn roleDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn captchaAttemptsDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn priceDataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn weightDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn priceDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn2;
         private DataGridViewTextBoxColumn innDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn addresDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn salesmanDataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn buyerDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn phoneDataGridViewTextBoxColumn;
-        private BindingSource customerBindingSource;
-        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn4;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private DataGridViewTextBoxColumn salesmanIdDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn productIdDataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn valueproductDataGridViewTextBoxColumn;
-        private BindingSource orderBindingSource;
-        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn3;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private DataGridViewTextBoxColumn customersIdDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn productIdDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn materialIdDataGridViewTextBoxColumn;
-        private BindingSource specificationBindingSource;
-        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn2;
-        private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn1;
-        private DataGridViewTextBoxColumn priceDataGridViewTextBoxColumn1;
-        private DataGridViewTextBoxColumn weightDataGridViewTextBoxColumn;
-        private BindingSource materialBindingSource;
-        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn1;
-        private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn priceDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn loginDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn passwordDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn roleDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn captchaAttemptsDataGridViewTextBoxColumn;
     }
 }

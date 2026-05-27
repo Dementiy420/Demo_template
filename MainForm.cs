@@ -1,5 +1,4 @@
 ﻿using Demo_entity.Database;
-using Demo_entity.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Demo_template.Forms
@@ -8,30 +7,27 @@ namespace Demo_template.Forms
     {
 
         MydbContext context;
-        List<BindingSource> grids = new List<BindingSource>();
 
         public string Role;
 
         public MainForm()
         {
             InitializeComponent();
-
             context = new MydbContext();
 
             context.Users.Load();
-
-            grids.AddRange
-                (
-                userBindingSource,
-                productBindingSource,
-                orderBindingSource,
-                customerBindingSource,
-                materialBindingSource,
-                specificationBindingSource
-                );
+            context.Products.Load();
+            context.Orders.Load();
+            context.Specifications.Load();
+            context.Materials.Load();
+            context.Customers.Load();
 
             userBindingSource.DataSource = context.Users.Local.ToBindingList();
-
+            productBindingSource.DataSource = context.Products.Local.ToBindingList();
+            orderBindingSource.DataSource = context.Orders.Local.ToBindingList();
+            specificationBindingSource.DataSource = context.Specifications.Local.ToBindingList();
+            materialBindingSource.DataSource = context.Materials.Local.ToBindingList();
+            customerBindingSource.DataSource = context.Customers.Local.ToBindingList();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -47,21 +43,6 @@ namespace Demo_template.Forms
             {
                 MessageBox.Show(ex.Message);
             }
-
-        }
-        private void UsersSave_Click(object sender, EventArgs e)
-        {
-            tabControl1.SelectedTab.Controls.OfType<DataGridView>().FirstOrDefault().EndEdit();
-            try 
-            {
-                context.SaveChanges();
-
-                MessageBox.Show("Данные были сохранены!", "Операция прошла успешно!", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-            }
-            catch 
-            {
-                MessageBox.Show("Произошла ошибка при сохранении!", "Ошибка!", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
-            }
         }
 
         private void DeleteRow_Click(object sender, EventArgs e)
@@ -74,12 +55,11 @@ namespace Demo_template.Forms
                 {
                     grid.Rows.Remove(row);
                 }
-                MessageBox.Show("Данные удалены!");
-
+                MessageBox.Show("Данные удалены!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch
             {
-                MessageBox.Show("Ошибка выполнения операции!");
+                MessageBox.Show("Ошибка выполнения операции!\nЗаполните поля корректно!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -96,6 +76,26 @@ namespace Demo_template.Forms
             {
                 ordersForm.ShowDialog();
             }
+        }
+
+        private void SaveData_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedTab.Controls.OfType<DataGridView>().FirstOrDefault().EndEdit();
+            try
+            {
+                context.SaveChanges();
+
+                MessageBox.Show("Данные были сохранены!", "Операция прошла успешно!", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+            }
+            catch
+            {
+                MessageBox.Show("Произошла ошибка при сохранении!", "Ошибка!", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+            }
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            context?.Dispose();
         }
     }
 }

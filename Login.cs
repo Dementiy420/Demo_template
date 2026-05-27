@@ -1,67 +1,69 @@
-﻿using Demo_template.Forms;
-using System;
-using System.Windows.Forms;
+﻿using Demo_entity.Database;
+using Demo_entity.Models;
+using Demo_template.Forms;
 
 namespace Demo_template
 {
     public partial class Login : Form
     {
+        private MydbContext context;
         string role; // хранение роли
-        public Login() => InitializeComponent();
+        public Login()
+        {
+            context = new MydbContext();
+            InitializeComponent();
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string login = Login_Entry.Text;
-            string password = Password_Entry.Text;
-
-            if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password))
+            try
             {
-                MessageBox.Show("Поля не должны быть пустыми!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                if (string.IsNullOrEmpty(Login_Entry.Text) || string.IsNullOrEmpty(Password_Entry.Text))
+                    throw new Exception("Поля не должны быть пустыми!");
 
-                    int attempts = 3; // парсинг строки "Попытки"
-                    role = "Admin";
+                User? user = context.Users.FirstOrDefault(u => u.Login == Login_Entry.Text);
 
-                    if (attempts <= 0) // проверка на блокировку
-                    {
-                        MessageBox.Show("Вы заблокированы! Обратитесь к администратору.", "Превышено количество попыток!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        return;
-                    }
+                if (user is null)
+                    throw new Exception("Пользователя не существует!");
+                if (user.CaptchaAttempts <= 0)
+                    throw new Exception("Вы заблокированы! обратитесь к администратору!");
 
-                    if (true)
-                        Authorize(attempts, login, role);
-                    else                     
-                        FailAuthorize(attempts, login);                    
+                role = user.Role;
+                Authorize(user);
             }
-
-            else
-                MessageBox.Show("Пользователя не существует!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         public string SendRole() => role; // метод для передачи роли в главную форму        
 
-        private void FailAuthorize(int attempts, string login)
+        private void Authorize(User user)
         {
-            MessageBox.Show($"Вы ввели неверный логин или пароль. Пожалуйста проверьте ещё раз введенные данные!\nОсталось попыток: {attempts-1}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-
-        private void Authorize(int attempts, string login, string role) 
-        {            
-            MessageBox.Show("Вы успешно авторизовались!", "Уведомление", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            if (role == "Admin") // обход каптчи для админов
+            if (user.Password == Password_Entry.Text)
             {
-                DialogResult = DialogResult.OK;
-                return;
-            }
-
-            using (var captcha = new Captcha(login, attempts)) //Открываем Каптчу как диалоговое окно
-            {
-                if (captcha.ShowDialog() == DialogResult.OK) 
+                using (var captcha = new Captcha(user, context)) //Открываем Каптчу как диалоговое окно
                 {
-                    DialogResult = DialogResult.OK;
+                    if (captcha.ShowDialog() == DialogResult.OK)
+                    {
+                        role = captcha.Role;
+                        DialogResult = DialogResult.OK;
+                        MessageBox.Show("Вы успешно авторизовались!", "Уведомление", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
             }
+            else
+            {
+                user.CaptchaAttempts -= 1;
+                context.SaveChanges();
+                MessageBox.Show($"Неверно введен пароль!\nПопыток осталось: {user.CaptchaAttempts}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void Login_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            context?.Dispose();
         }
     }
 }
