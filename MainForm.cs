@@ -51,7 +51,7 @@ namespace Demo_template.Forms
         }
         private void UsersSave_Click(object sender, EventArgs e)
         {
-            userBindingSource.EndEdit();
+            tabControl1.SelectedTab.Controls.OfType<DataGridView>().FirstOrDefault().EndEdit();
             try 
             {
                 context.SaveChanges();
