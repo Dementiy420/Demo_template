@@ -1,33 +1,39 @@
-п»їusing Demo_template.Forms;
-using System;
-using System.Windows.Forms;
+using Demo_template;
+using Demo_template.Forms;
+using System.Data;
 
-namespace Demo_template
+namespace Demo_entity
 {
     internal static class Program
     {
         /// <summary>
-        /// Р“Р»Р°РІРЅР°СЏ С‚РѕС‡РєР° РІС…РѕРґР° РґР»СЏ РїСЂРёР»РѕР¶РµРЅРёСЏ.
+        ///  The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+            // To customize application configuration such as set high DPI settings or default font,
+            // see https://aka.ms/applicationconfiguration.
+            ApplicationConfiguration.Initialize();
+            
+            MainForm mainForm = new MainForm();
+            
+            Application.Run(mainForm);
 
-            //РІС‹Р·РѕРІ С„РѕСЂРјС‹ Р°РІС‚РѕСЂРёР·Р°С†РёРё РєР°Рє РґРёР°Р»РѕРіРѕРІРѕРіРѕ РѕРєРЅР° (РґР»СЏ РёР·Р±РµР¶Р°РЅРёСЏ Hide(), РєРѕС‚РѕСЂС‹Р№ РЅРµ Р·Р°РІРµСЂС€Р°РµС‚ РїРѕР»РЅРѕСЃС‚СЊСЋ СЂР°Р±РѕС‚Сѓ РїСЂРѕРіСЂР°РјРјС‹)
-            using (Login loginForm = new Login()) 
-            {
-                if (loginForm.ShowDialog() == DialogResult.OK) 
-                {
-                    string role = loginForm.SendRole();
 
-                    MainForm mainForm = new MainForm();
-                    mainForm.Role = role;
+            //вызов формы авторизации как диалогового окна (для избежания Hide(), который не завершает полностью работу программы)
+            //using (Login loginForm = new Login())
+            //{
+            //    if (loginForm.ShowDialog() == DialogResult.OK)
+            //    {
+            //        string role = loginForm.SendRole();
 
-                    Application.Run(mainForm);
-                }
-            }
+            //        MainForm mainForm = new MainForm();
+            //        mainForm.Role = role;
+
+            //        Application.Run(mainForm);
+            //    }
+            //}
         }
     }
 }
